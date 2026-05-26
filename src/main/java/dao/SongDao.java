@@ -11,17 +11,17 @@ import java.util.List;
 public class SongDao {
 
     public void deleteAll(){
-        String sql = "DELETE FROM songs";
+        String sql = "DELETE FROM songs;";
         try(Connection connection = DatabaseConfig.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Songs not deleted from DB" + e);
+            throw new RuntimeException("deleteAll doesnt work " + e);
         }
     }
 
     public int create(Song song){
-        String sql ="INSERT INTO songs (title, artist, category_id) VALUES (?, ?, ?)";
+        String sql ="INSERT INTO songs (title, artist, category_id) VALUES (?, ?, ?);";
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
                 //create sql statement for jdbc
@@ -40,7 +40,7 @@ public class SongDao {
 
         }
     } catch (SQLException e) {
-            throw new RuntimeException("this is not good" + e);
+            throw new RuntimeException("create doesnt work " + e);
         }
     }
 
@@ -49,7 +49,7 @@ public class SongDao {
                 "FROM songs s " +
                 "JOIN categories c " +
                 "ON s.category_id = c.id " +
-                "ORDER BY s.title ASC";
+                "ORDER BY s.title ASC;";
         List<Song> songs = new ArrayList<>();
         try(Connection connection = DatabaseConfig.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -69,7 +69,7 @@ public class SongDao {
         String sql = "SELECT s.id, s.title, s.artist, s.categoryId " +
                 "FROM songs s " +
                 "WHERE s.categoryId = ? " +
-                "ORDER BY s.title ASC";
+                "ORDER BY s.title ASC;";
         List<Song> moreSongs = new ArrayList<>();
         try(Connection connection = DatabaseConfig.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class SongDao {
 
     public void deleteById(int songId){
         String sql = "DELETE FROM songs " +
-                "WHERE id = ?";
+                "WHERE id = ?;";
         try(Connection connection = DatabaseConfig.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {statement.setInt(1, songId);

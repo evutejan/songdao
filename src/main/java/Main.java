@@ -23,13 +23,13 @@ public class Main {
 
         SongDao songDao = new SongDao();
 
-        // 1. deleteAll()
+         //1. deleteAll()
         songDao.deleteAll();
         System.out.println("All songs deleted");
 
         // 2. create()
         Song song1 = new Song(0, "Believer", "Imagine Dragons", 1);
-        Song song2 = new Song(0, "Numb", "Linkin Park", 2);
+        Song song2 = new Song(1, "Numb", "Linkin Park", 2);
 
         int id1 = songDao.create(song1);
         int id2 = songDao.create(song2);
